@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Download dependencies
+        run: go mod download
+
+      - name: Run tests
+        run: go test ./pkg/analyzer/... -v -race
+
+      - name: Build
+        run: go build -o golinter ./cmd/golinter
+
+      - name: Run linter on itself
+        run: go vet -vettool=./golinter ./cmd/... ./pkg/... || true

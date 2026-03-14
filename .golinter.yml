@@ -1,0 +1,10 @@
+rules:
+  lowercase: true
+  english: true
+  special: true
+  sensitive: true
+
+extra_keywords:
+  - ssn
+  - credit_card
+  - bank_account
