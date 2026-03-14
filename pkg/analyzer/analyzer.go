@@ -12,6 +12,7 @@ import (
 
 var Analyzer = &analysis.Analyzer{
 	Name:     "golinter",
+	Doc:      "Go analyzer",
 	Run:      run,
 	Requires: []*analysis.Analyzer{inspect.Analyzer},
 }
